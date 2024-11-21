@@ -18,11 +18,12 @@ def compile(dir_path, file_path):
 
 # Path root della repo
 repo_root = os.environ.get("GITHUB_WORKSPACE", os.getcwd())
+repo_root_path = Path(repo_root)
 
 # Cancellazione log di compilazione e log degli errori
-os.remove(repo_root / "compilation.log")
-if (path.exists(repo_root / "errors.log")):
-    os.remove(repo_root / "errors.log")
+os.remove(repo_root_path / "compilation.log")
+if (path.exists(repo_root_path / "errors.log")):
+    os.remove(repo_root_path / "errors.log")
 
 # Vista riscorsiva della cartella corrente per individuare ogni file .tex
 for cartella, sottocartelle, files in os.walk(repo_root):
