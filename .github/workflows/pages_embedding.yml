@@ -14,11 +14,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Install TeX Live
-      - name: Install TeX Live
+      # Step 2: Install TeX Live if not cached than chache it
+      - name: Cache TeX Live
+      uses: actions/cache@v3
+      with:
+        path: /usr/share/texlive
+        key: ${{ runner.os }}-texlive
+        restore-keys: |
+          ${{ runner.os }}-texlive
+
+        - name: Install TeX Live if not cached
         run: |
-          sudo apt-get update
-          sudo apt-get install -y texlive-full
+          if [ ! -d /usr/share/texlive ]; then
+            sudo apt-get update
+            sudo apt-get install -y texlive-full
+          fi
 
       # Step 3: Set up Python
       - name: Set up Python
