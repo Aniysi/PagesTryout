@@ -6,7 +6,7 @@ from pathlib import Path
 # Dato il path di un file lo compila in .pdf mediante il comando 'pdflatex'
 def compile(dir_path, file_path):
     try:
-        with open(f"{file_path}.logs", "w") as log_file:
+        with open(f"compilation.log", "w") as log_file:
             subprocess.run(["pdflatex", file_path], cwd=dir_path, check=True, stdout=log_file, stderr=log_file)
         #print(f"{file_path} compilato con successo!")
     except subprocess.CalledProcessError:

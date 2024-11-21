@@ -38,7 +38,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
+          git add *.pdf
+          git add compilation.log
           git commit -m "GH - ACTION: compiled and committed .tex files"
           git push
         env:
