@@ -20,7 +20,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-recommended
 
       # Step 4: Set up Python
-      - name: Set up Python
+      - name: Set-up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
@@ -29,3 +29,15 @@ jobs:
       - name: Run TeX compile script
         run: |
           python html_embedding.py
+
+      # Step 6: Commit and push changes
+      - name: Commit and push changes on repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add test.txt
+          git commit -m "Add test.txt created by GitHub Actions"
+          git push
+        env:
+          # Usa il token GitHub per autenticare il push
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
