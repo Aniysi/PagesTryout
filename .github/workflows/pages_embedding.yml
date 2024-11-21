@@ -1,4 +1,4 @@
-name: Run TeX Live and Python Script
+name: Run Python script for TeX Live compilation
 
 on:
   push:
@@ -14,36 +14,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Install TeX Live if not cached than chache it
+      # Step 2: Restore TeX Live cache
       - name: Cache TeX Live
-      uses: actions/cache@v3
-      with:
-        path: /usr/share/texlive
-        key: ${{ runner.os }}-texlive
-        restore-keys: |
-          ${{ runner.os }}-texlive
+        uses: actions/cache@v3
+        with:
+          path: /usr/share/texlive
+          key: ${{ runner.os }}-texlive
+          restore-keys: |
+            ${{ runner.os }}-texlive
 
-        - name: Install TeX Live if not cached
+      # Step 3: Install TeX Live if not cached
+      - name: Install TeX Live if not cached
         run: |
           if [ ! -d /usr/share/texlive ]; then
             sudo apt-get update
             sudo apt-get install -y texlive-full
           fi
 
-      # Step 3: Set up Python
+      # Step 4: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      # Step 4: Install Python dependencies (if any)
-      - name: Install Python dependencies
+      # Step 5: Run Python script to compile TeX files
+      - name: Run TeX compile script
         run: |
-          python -m pip install --upgrade pip
-          # Add any required Python packages here
-          pip install -r requirements.txt || true
-
-      # Step 5: Run your Python script
-      - name: Run Python script
-        run: |
-          python html_embedding.py
+          python compile_tex.py
