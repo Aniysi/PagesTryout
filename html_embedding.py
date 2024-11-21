@@ -1,6 +1,8 @@
 import subprocess
 import os
 from pathlib import Path
+import os.path
+from os import path
 
 
 # Dato il path di un file lo compila in .pdf mediante il comando 'pdflatex'
@@ -17,7 +19,8 @@ def compile(dir_path, file_path):
 
 # Cancellazione log di compilazione e log degli errori
 os.remove("compilation.log")
-os.remove("errors.log")
+if (path.exists("errors.log")):
+    os.remove("errors.log")
 
 # Vista riscorsiva della cartella corrente per individuare ogni file .tex
 for cartella, sottocartelle, files in os.walk(os.getcwd()):
