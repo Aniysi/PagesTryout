@@ -40,4 +40,4 @@ jobs:
       # Step 5: Run Python script to compile TeX files
       - name: Run TeX compile script
         run: |
-          python compile_tex.py
+          python html_embedding.py
