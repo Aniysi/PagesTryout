@@ -31,7 +31,7 @@ jobs:
       # Step 5: Run Python script to compile TeX files
       - name: Run TeX compile script
         run: |
-          python html_embedding.py
+          python pages/html_embedding.py
 
       # Step 6: Commit and push changes
       - name: Commit and push changes on repo

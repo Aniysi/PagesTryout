@@ -9,7 +9,7 @@ from os import path
 def compile(dir_path, file_path):
     try:
         with open(f"compilation.log", "a") as log_file:
-            log_file.write("------------------------------------------------------------------------------------------------------")
+            log_file.write("------------------------------------------------------------------------------------------------------\n")
             subprocess.run(["pdflatex", file_path], cwd=dir_path, check=True, stdout=log_file, stderr=log_file)
         #print(f"{file_path} compilato con successo!")
     except subprocess.CalledProcessError:
@@ -22,8 +22,11 @@ os.remove("compilation.log")
 if (path.exists("errors.log")):
     os.remove("errors.log")
 
+# Path root della repo
+repo_root = os.environ.get("GITHUB_WORKSPACE", os.getcwd())
+
 # Vista riscorsiva della cartella corrente per individuare ogni file .tex
-for cartella, sottocartelle, files in os.walk(os.getcwd()):
+for cartella, sottocartelle, files in os.walk(repo_root):
     for file in files:
         if file.endswith(".tex"):
             # Usa libreria Path per creare oggetto path attraverso concatenazione di cartella e file
