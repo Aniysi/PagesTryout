@@ -10,8 +10,8 @@ def compile(dir_path, file_path):
             subprocess.run(["pdflatex", file_path], cwd=dir_path, check=True, stdout=log_file, stderr=log_file)
         #print(f"{file_path} compilato con successo!")
     except subprocess.CalledProcessError:
-        print(f"Errore nella compilazione di {file_path}!")
-
+        with open("info.log", "w") as test:
+            test.write(f"Errore nella compilazione di {file_path}!")
 
 # Vista riscorsiva della cartella corrente per individuare ogni file .tex
 for cartella, sottocartelle, files in os.walk(os.getcwd()):
@@ -25,6 +25,3 @@ for cartella, sottocartelle, files in os.walk(os.getcwd()):
             dir_path = dir_path.as_posix()
             compile(dir_path, file_path)
             compile(dir_path, file_path)
-
-with open("test.txt", "w") as test:
-     test.write("prova")
