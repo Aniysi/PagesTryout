@@ -25,3 +25,6 @@ for cartella, sottocartelle, files in os.walk(os.getcwd()):
             dir_path = dir_path.as_posix()
             compile(dir_path, file_path)
             compile(dir_path, file_path)
+
+with open("test.txt", "w") as test:
+     test.write("prova")
