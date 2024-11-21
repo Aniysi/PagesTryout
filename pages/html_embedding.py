@@ -21,7 +21,7 @@ repo_root = os.environ.get("GITHUB_WORKSPACE", os.getcwd())
 repo_root_path = Path(repo_root)
 
 # Cancellazione log di compilazione e log degli errori
-os.remove(repo_root_path / "pages" / "pagescompilation.log")
+os.remove(repo_root_path / "pages" / "compilation.log")
 if (path.exists(repo_root_path / "pages" / "errors.log")):
     os.remove(repo_root_path / "pages" / "errors.log")
 
